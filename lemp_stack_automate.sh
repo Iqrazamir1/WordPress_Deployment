@@ -22,4 +22,4 @@ sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml ph
 sudo php -v >> /root/testing.txt
 
 # Run the wordpress_install script
-sudo bash /EPA_WordPress_Website/wordpress_automate.sh  
+sudo bash /root/EPA_WordPress_Website/wordpress_automate.sh  
