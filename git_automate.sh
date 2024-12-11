@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Install Git 
-sudo apt -y install git 
+# Updates all the latest security patches and software packages to ensure the highest level of security for my deployment. 
+sudo apt -y update
+sudo apt -y upgrade
+ 
 cd /root/
 sudo git clone https://github.com/Iqrazamir1/EPA_WordPress_Website.git
 sudo chmod -R 755 EPA_WordPress_Website
