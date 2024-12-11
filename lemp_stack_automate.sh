@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Updates all the latest security patches and software packages to ensure the highest level of security for my deployment.
-sudo apt -y update 
-sudo apt -y upgrade 
-
 # This file will contain the output of my LEMP Stack unit tests.
 sudo touch /root/testing.txt
 
