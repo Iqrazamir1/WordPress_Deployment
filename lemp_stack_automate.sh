@@ -21,7 +21,7 @@ sudo php -v >> /root/testing.txt
 #sudo mv /var/www/html/index.html /var/www/html/index.html.old
 
 # This moves the nginx.conf file to the located where configuation files and typically placed.  
-sudo mv /root/WordPressPractise/nginx.conf /etc/nginx/conf.d/nginx.conf
+sudo mv /root/EPA_WordPress_Website/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Generates a DNH record for an EC2 Instance.
 dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
