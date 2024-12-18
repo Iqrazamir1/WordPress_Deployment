@@ -17,13 +17,7 @@ sudo mysql -e "CREATE USER wpuser@localhost identified by 'my_football'"
 sudo mysql -e "GRANT ALL PRIVILEGES ON wordpress.* to wpuser@localhost"
 sudo mysql -e "FLUSH PRIVILEGES" # Applies everything you've done 
 
-# Configure WordPress
-cd wordpress/
-cp wp-config-sample.php wp-config.php 
+sudo wget -O /var/www/html/wordpress/wp-config.php https://iqrawordpressbucket.s3.eu-north-1.amazonaws.com/wp-config.php
 
-# wget s3://iqrawordpressbucket/wp-config.php
-
-# sudo chmod 640 wp-config.php 
-# sudo chown -R www-data:www-data /var/www/html/wordpress
-# sudo nginx -t
-# systemctl reload nginx  
+sudo chmod 640 wp-config.php 
+sudo chown -R www-data:www-data /var/www/html/wordpress
