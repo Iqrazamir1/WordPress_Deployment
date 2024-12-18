@@ -17,9 +17,6 @@ sudo systemctl status mariabd >> /root/testing.txt
 sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
 sudo php -v >> /root/testing.txt
 
-# This renames the default index.html page and the purpose is to disables the default Apache testing page. 
-#sudo mv /var/www/html/index.html /var/www/html/index.html.old
-
 # This moves the nginx.conf file to the located where configuation files and typically placed.  
 sudo mv /root/EPA_WordPress_Website/nginx.conf /etc/nginx/conf.d/nginx.conf
 
@@ -28,6 +25,9 @@ dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.am
 
 # Updates the Nginx config file with the server name of the EC2 Instance 
 sed -i "s/SERVERNAME/$dns_recored/g" /etc/nginx/conf.d/nginx.conf
+
+# Disabling the defaut config file 
+sudo rm /etc/nginx/sites-enabled/default 
 
 # This will only reload nginx if the test is successful 
 nginx -t && systemctl reload nginx
