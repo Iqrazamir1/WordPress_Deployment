@@ -18,7 +18,7 @@ sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml ph
 sudo php -v >> /root/testing.txt
 
 # This renames the default index.html page and the purpose is to disables the default Apache testing page. 
-sudo mv /var/www/html/index.html /var/www/html/index.html.old
+#sudo mv /var/www/html/index.html /var/www/html/index.html.old
 
 # This moves the nginx.conf file to the located where configuation files and typically placed.  
 sudo mv /root/WordPressPractise/nginx.conf /etc/nginx/conf.d/nginx.conf
