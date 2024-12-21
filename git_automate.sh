@@ -6,5 +6,5 @@ sudo apt -y upgrade
  
 cd /root/
 sudo git clone -b develop https://github.com/Iqrazamir1/EPA_WordPress_Website.git
-sudo chmod -R 755 EPA_WordPress_Website
+sudo chmod -R 755 /root/EPA_WordPress_Website
 sudo bash /root/EPA_WordPress_Website/lemp_stack_automate.sh
