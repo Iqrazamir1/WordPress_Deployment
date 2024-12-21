@@ -13,7 +13,7 @@ sudo rm latest.zip
 
 # Create a MariaDB Database and a User for the WordPress Site  
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS wordpress"
-sudo mysql -e "CREATE USER wpuser@localhost identified by 'my_football'"
+sudo mysql -e "CREATE USER wpuser@localhost identified by 'my_password'"
 sudo mysql -e "GRANT ALL PRIVILEGES ON wordpress.* to wpuser@localhost"
 sudo mysql -e "FLUSH PRIVILEGES" # Applies everything you've done 
 
