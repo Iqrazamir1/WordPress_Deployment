@@ -40,16 +40,3 @@ check_exit_status "chmod"
 echo "Running lemp-setup.sh script..." | tee -a $LOG_FILE
 sudo bash /root/EPA_WordPress_Website/lemp_stack_automate.sh
 check_exit_status "lemp-setup.sh"
-
-##########################################################################################################################
-
-#!/bin/bash
-
-# Updates all the latest security patches and software packages to ensure the highest level of security for my deployment. 
-#sudo apt -y update
-#sudo apt -y upgrade
- 
-#cd /root/
-#sudo git clone -b develop https://github.com/Iqrazamir1/EPA_WordPress_Website.git
-#sudo chmod -R 755 /root/EPA_WordPress_Website
-#sudo bash /root/EPA_WordPress_Website/lemp_stack_automate.sh
