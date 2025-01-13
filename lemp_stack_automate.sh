@@ -34,4 +34,4 @@ sudo rm /etc/nginx/sites-enabled/default
 nginx -t && systemctl reload nginx
 
 # Run the wordpress_install script
-sudo bash /root/WordPress_Deployment/wordpress_automate.sh  
+sudo bash /root/WordPress_Deployment/ssl_certbot_automate.sh
