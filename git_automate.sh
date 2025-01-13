@@ -28,15 +28,16 @@ check_exit_status "apt upgrade"
 
 # Clone the GitHub repository
 echo "Cloning GitHub repository..." | tee -a $LOG_FILE
-sudo git clone -b develop https://github.com/Iqrazamir1/EPA_WordPress_Website.git /root/EPA_WordPress_Website
+sudo git clone -b develop https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
+
 check_exit_status "git clone"
 
 # Change permissions of the cloned repository
 echo "Changing permissions of the cloned repository..." | tee -a $LOG_FILE
-sudo chmod -R 755 /root/EPA_WordPress_Website
+sudo chmod -R 755 /root/WordPress_Deployment
 check_exit_status "chmod"
 
 # Run the setup script
 echo "Running lemp-setup.sh script..." | tee -a $LOG_FILE
-sudo bash /root/EPA_WordPress_Website/lemp_stack_automate.sh
+sudo bash /root/WordPress_Deployment/lemp_stack_automate.sh
 check_exit_status "lemp-setup.sh"
