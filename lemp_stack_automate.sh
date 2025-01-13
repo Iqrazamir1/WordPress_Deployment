@@ -8,6 +8,7 @@ sudo apt -y install nginx
 sudo systemctl start nginx && sudo systemctl enable nginx 
 sudo systemctl status nginx > /root/testing.txt
 
+# K12 is covered below as my MariaDB database is being installed and enabled.
 # Install/Start MariaDB
 sudo apt -y install mariadb-server
 sudo systemctl start mariadb && sudo systemctl enable mariadb 
