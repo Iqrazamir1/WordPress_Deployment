@@ -25,7 +25,7 @@ sudo mysql -e "CREATE USER $username@localhost identified by '$password'"
 sudo mysql -e "GRANT ALL PRIVILEGES ON $username.* to $username@localhost"
 sudo mysql -e "FLUSH PRIVILEGES" # Applies everything you've done 
 
-sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+sudo mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wp-config.php
 sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/wordpress
 
