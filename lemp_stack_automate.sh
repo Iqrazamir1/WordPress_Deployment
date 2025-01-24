@@ -8,6 +8,7 @@ sudo apt -y install nginx
 sudo systemctl start nginx && sudo systemctl enable nginx 
 sudo systemctl status nginx > /root/testing.txt
 
+# K12 is covered below as my MariaDB database is being installed and enabled.
 # Install/Start MariaDB
 sudo apt -y install mariadb-server
 sudo systemctl start mariadb && sudo systemctl enable mariadb 
@@ -18,7 +19,7 @@ sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml ph
 sudo php -v >> /root/testing.txt
 
 # This moves the nginx.conf file to the located where configuation files and typically placed.  
-sudo mv /root/EPA_WordPress_Website/nginx.conf /etc/nginx/conf.d/nginx.conf
+sudo mv /root/WordPress_Deployment/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Generates a DNH record for an EC2 Instance.
 dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
@@ -33,4 +34,4 @@ sudo rm /etc/nginx/sites-enabled/default
 nginx -t && systemctl reload nginx
 
 # Run the wordpress_install script
-sudo bash /root/EPA_WordPress_Website/wordpress_automate.sh  
+sudo bash /root/WordPress_Deployment/ssl_certbot_automate.sh
