@@ -39,8 +39,7 @@ check_exit_status "chmod"
 # Run the setup script
 log "Running lemp-setup.sh script..."
 
-sudo apt -y update
-sudo apt -y upgrade 
+sudo apt -y update && sudo apt -y upgrade 
 sudo touch /root/testing.txt
 sudo apt -y install nginx
 sudo systemctl start nginx && sudo systemctl enable nginx 
@@ -50,13 +49,22 @@ sudo php -v >> /root/testing.txt
 
 sudo mv /root/WordPress_Deployment/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-# Update nginx configuration file
+# Generates a DNH record for an EC2 Instance.
+dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
+
+# Updates the Nginx config file with the server name of the EC2 Instance 
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
+
+# Disabling the defaut config file 
+sudo rm /etc/nginx/sites-enabled/default
+
+# # Update nginx configuration file
+############ sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
+
 nginx -t && systemctl reload nginx 
 
 # Update package list and install Certbot and Certbot Nginx plugin
-sudo apt -y update
-sudo apt -y upgrade
+sudo apt -y update && sudo apt -y upgrade
 sudo apt -y install certbot
 sudo apt -y install python3-certbot-nginx
 
@@ -79,3 +87,7 @@ sudo rm latest.zip
 sudo mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wp-config.php
 sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/wp-config.php 
+
+sed -i "s/password_here/$password/g" /var/www/html/wp-config.php
+sed -i "s/username_here/$username/g" /var/www/html/wp-config.php
+sed -i "s/database_name_here/$username/g" /var/www/html/wp-config.php
