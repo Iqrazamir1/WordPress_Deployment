@@ -49,17 +49,8 @@ sudo php -v >> /root/testing.txt
 
 sudo mv /root/WordPress_Deployment/nginx.conf /etc/nginx/conf.d/nginx.conf
 
-# Generates a DNH record for an EC2 Instance.
-dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
-
-# Updates the Nginx config file with the server name of the EC2 Instance 
+# Update nginx configuration file
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
-
-# Disabling the defaut config file 
-sudo rm /etc/nginx/sites-enabled/default
-
-# # Update nginx configuration file
-############ sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
 
 nginx -t && systemctl reload nginx 
 
