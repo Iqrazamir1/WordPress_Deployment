@@ -48,19 +48,19 @@ sudo mv /root/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/nginx.co
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
 nginx -t && systemctl reload nginx 
 
-# # Update package list and install Certbot and Certbot Nginx plugin
-# sudo apt -y update && sudo apt -y upgrade
-# sudo apt -y install certbot
-# sudo apt -y install python3-certbot-nginx
+# Update package list and install Certbot and Certbot Nginx plugin
+sudo apt -y update && sudo apt -y upgrade
+sudo apt -y install certbot
+sudo apt -y install python3-certbot-nginx
 
-# # Define your email
-# EMAIL="zamiriqra0@outlook.com"
-# DOMAIN="ua92.yourdev.uk"
+# Define your email
+EMAIL=EMAIL
+DOMAIN=DOMAIN
 
-# sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
+sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
 
-# # Nginx unit test that will reload Nginx to apply changes ONLY if the test is successful
-# sudo nginx -t && systemctl reload nginx
+# Nginx unit test that will reload Nginx to apply changes ONLY if the test is successful
+sudo nginx -t && systemctl reload nginx
 
 # Install WordPress
 cd /var/www/html
