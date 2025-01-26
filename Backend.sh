@@ -17,17 +17,23 @@ username=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 25)
 echo $password > creds.txt
 echo $username >> creds.txt
 
-# Connect to S3 Bucket
-aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
-sudo gunzip /tmp/wordpress_dump.sql.gz
+# # Connect to S3 Bucket
+# aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
+# sudo gunzip /tmp/wordpress_dump.sql.gz
+# sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
+# sudo mysql $username < /tmp/wordpress_dump.sql
+# sudo rm /tmp/wordpress_dump.sql
+
+# Create a MariaDB Database and a User for the WordPress Site  
 sudo mysql -e "CREATE DATABASE IF NOT EXISTS $username"
-sudo mysql $username < /tmp/wordpress_dump.sql
-sudo rm /tmp/wordpress_dump.sql
+sudo mysql -e "CREATE USER $username@localhost identified by '$password'"
+sudo mysql -e "GRANT ALL PRIVILEGES ON $username.* to $username@localhost"
+sudo mysql -e "FLUSH PRIVILEGES" # Applies everything you've done 
 
 # Update wp-config.php with the database credentials
-######### sed -i "s/password_here/$password/g" /var/www/html/wp-config.php
-######### sed -i "s/username_here/$username/g" /var/www/html/wp-config.php
-######### sed -i "s/database_name_here/$username/g" /var/www/html/wp-config.php
+sed -i "s/password_here/$password/g" /var/www/html/wp-config.php
+sed -i "s/username_here/$username/g" /var/www/html/wp-config.php
+sed -i "s/database_name_here/$username/g" /var/www/html/wp-config.php
 
 # This securely stores the credentials file in AWS S3 for later use or backup
 aws s3 cp creds.txt s3://mariadbdatabase
