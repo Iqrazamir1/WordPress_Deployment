@@ -51,7 +51,6 @@ sudo mv /root/WordPress_Deployment/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Update nginx configuration file
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
-
 nginx -t && systemctl reload nginx 
 
 # Update package list and install Certbot and Certbot Nginx plugin
@@ -79,6 +78,6 @@ sudo mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wp-config.php
 sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/wp-config.php 
 
-sed -i "s/password_here/$password/g" /var/www/html/wp-config.php
-sed -i "s/username_here/$username/g" /var/www/html/wp-config.php
-sed -i "s/database_name_here/$username/g" /var/www/html/wp-config.php
+SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
+STRING='put your unique phrase here'
+printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/html/wp-config.php
