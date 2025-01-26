@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Log file path
-LOG_FILE="/var/log/script_execution.log"
+LOG_FILE="/var/log/frontend_script_execution.log"
 
 # Function to check the exit status of the last executed command
 check_exit_status() {
@@ -26,58 +26,57 @@ echo "Running apt upgrade..." | tee -a $LOG_FILE
 sudo apt -y upgrade
 check_exit_status "apt upgrade"
 
-# Clone the GitHub repository
-echo "Cloning GitHub repository..." | tee -a $LOG_FILE
-sudo git clone -b develop https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
-check_exit_status "git clone"
-
-# Change permissions of the cloned repository
-echo "Changing permissions of the cloned repository..." | tee -a $LOG_FILE
-sudo chmod -R 755 /root/WordPress_Deployment
-check_exit_status "chmod"
-
-# Run the setup script
-log "Running lemp-setup.sh script..."
-
-sudo apt -y update && sudo apt -y upgrade 
-sudo touch /root/testing.txt
+# Install Nginx
+echo "Installing Nginx..." | tee -a $LOG_FILE
 sudo apt -y install nginx
-sudo systemctl start nginx && sudo systemctl enable nginx 
-sudo systemctl status nginx > /root/testing.txt
-sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
-sudo php -v >> /root/testing.txt
+check_exit_status "Nginx installation"
 
+# Start and enable Nginx
+sudo systemctl start nginx && sudo systemctl enable nginx
+check_exit_status "Nginx service start and enable"
+
+# Install PHP and required extensions
+echo "Installing PHP and extensions..." | tee -a $LOG_FILE
+sudo apt -y install php-fpm php php-cli php-common php-imap php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
+check_exit_status "PHP installation"
+
+# Move the Nginx configuration file
+echo "Configuring Nginx..." | tee -a $LOG_FILE
 sudo mv /root/WordPress_Deployment/nginx.conf /etc/nginx/conf.d/nginx.conf
+check_exit_status "Nginx configuration file move"
 
-# Update nginx configuration file
+# Generate DNS record for the EC2 instance
+dns_record=$(curl -s icanhazip.com | sed 's/^/ec2-/; s/\./-/g; s/$/.compute-1.amazonaws.com/')
+
+# Update the Nginx config file with the server name of the EC2 instance
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
-nginx -t && systemctl reload nginx 
 
-# Update package list and install Certbot and Certbot Nginx plugin
-sudo apt -y update && sudo apt -y upgrade
-sudo apt -y install certbot
-sudo apt -y install python3-certbot-nginx
+# Disable the default Nginx configuration
+sudo rm /etc/nginx/sites-enabled/default
 
-# Define your email
+# Reload Nginx if the configuration test is successful
+nginx -t && sudo systemctl reload nginx
+check_exit_status "Nginx reload"
+
+# Install Certbot for SSL
+echo "Installing Certbot..." | tee -a $LOG_FILE
+sudo apt -y install certbot python3-certbot-nginx
+check_exit_status "Certbot installation"
+
+# Define your email and domain
 EMAIL="zamiriqra0@outlook.com"
 DOMAIN="ua92.yourdev.uk"
 
+# Obtain and install SSL certificate
+echo "Obtaining SSL certificate..." | tee -a $LOG_FILE
 sudo certbot --nginx --non-interactive --agree-tos --email $EMAIL -d $DOMAIN
+check_exit_status "SSL certificate installation"
 
-# Nginx unit test that will reload Nginx to apply changes ONLY if the test is successful
-sudo nginx -t && systemctl reload nginx
+# Reload Nginx to apply SSL changes
+sudo systemctl reload nginx
+check_exit_status "Nginx reload after SSL"
 
-# Install WordPress
-cd /var/www/html
-sudo apt -y install unzip 
-sudo wget https://wordpress.org/latest.zip 
-sudo unzip latest.zip  
-sudo rm latest.zip 
-
-sudo mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wp-config.php
-sudo chmod 640 /var/www/html/wp-config.php 
-sudo chown -R www-data:www-data /var/www/html/wp-config.php 
-
-SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
-STRING='put your unique phrase here'
-printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/html/wp-config.php
+# Run WordPress installation script
+echo "Running WordPress installation script..." | tee -a $LOG_FILE
+sudo bash /root/WordPress_Deployment/wordpress_automate.sh
+check_exit_status "WordPress installation script"
