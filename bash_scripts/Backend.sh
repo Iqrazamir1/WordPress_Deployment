@@ -1,11 +1,11 @@
 #!/bin/bash
 
-apt -y update && apt -y upgrade
+sudo apt -y update && sudo apt -y upgrade
 
 # Install the AWS CLI tool using Snap for managing AWS resources
 snap install aws-cli --classic
 
-apt install mariadb-server mariadb-client -y
+apt -y install mariadb-server mariadb-client
 
 sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
