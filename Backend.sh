@@ -25,9 +25,9 @@ sudo mysql $username < /tmp/wordpress_dump.sql
 sudo rm /tmp/wordpress_dump.sql
 
 # Update wp-config.php with the database credentials
-sed -i "s/password_here/$password/g" /var/www/html/wp-config.php
-sed -i "s/username_here/$username/g" /var/www/html/wp-config.php
-sed -i "s/database_name_here/$username/g" /var/www/html/wp-config.php
+######### sed -i "s/password_here/$password/g" /var/www/html/wp-config.php
+######### sed -i "s/username_here/$username/g" /var/www/html/wp-config.php
+######### sed -i "s/database_name_here/$username/g" /var/www/html/wp-config.php
 
 # This securely stores the credentials file in AWS S3 for later use or backup
 aws s3 cp creds.txt s3://mariadbdatabase
