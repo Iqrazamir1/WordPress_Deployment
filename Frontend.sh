@@ -48,7 +48,7 @@ sudo systemctl status nginx > /root/testing.txt
 sudo apt -y install php-fpm php php-cli php-common php-imap  php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
 sudo php -v >> /root/testing.txt
 
-sudo mv /root/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/nginx.conf
+sudo mv /root/WordPress_Deployment/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Update nginx configuration file
 sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
@@ -76,6 +76,6 @@ sudo wget https://wordpress.org/latest.zip
 sudo unzip latest.zip  
 sudo rm latest.zip 
 
-sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+sudo mv /var/www/html/wordpress/wp-config-sample.php /var/www/html/wp-config.php
 sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/wp-config.php 
