@@ -75,5 +75,5 @@ sudo chmod 640 /var/www/wp-config.php
 sudo chown -R www-data:www-data /var/www/html/
 
 SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
-STRING='apiwordpress'
+STRING='put your unique phrase here'
 printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/html/wp-config.php
