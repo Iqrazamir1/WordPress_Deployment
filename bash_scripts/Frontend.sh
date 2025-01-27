@@ -57,7 +57,7 @@ sudo apt -y install python3-certbot-nginx
 # CERTBOTEMAIL=EMAIL
 # CERTBOTURL=DOMAIN
 
-sudo certbot --nginx --non-interactive --agree-tos --email EMAIL -d DOMAIN
+sudo certbot --nginx --non-interactive --agree-tos --email CERTBOT_MAIL -d CERTBOT_URL
 
 # Nginx unit test that will reload Nginx to apply changes ONLY if the test is successful
 sudo nginx -t && systemctl reload nginx
