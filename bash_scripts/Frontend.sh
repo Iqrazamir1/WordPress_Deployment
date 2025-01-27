@@ -63,14 +63,15 @@ sudo certbot --nginx --non-interactive --agree-tos --email CERTBOT_MAIL -d CERTB
 sudo nginx -t && systemctl reload nginx
 
 # Install WordPress
-cd /var/www/html
+sudo rm -rf /var/www/html
 sudo apt -y install unzip 
-sudo wget https://wordpress.org/latest.zip 
-sudo unzip latest.zip  
-sudo rm latest.zip 
+sudo wget -O /var/www/latest.zip https://wordpress.org/latest.zip 
+sudo unzip /var/www/latest.zip -d /var/www/
+sudo rm /var/www/latest.zip 
+mv /var/www/wordpress /var/www/html
 
-sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
-sudo chmod 640 /var/www/html/wp-config.php 
+sudo mv /var/www/wp-config-sample.php /var/www/wp-config.php
+sudo chmod 640 /var/www/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/
 
 SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
