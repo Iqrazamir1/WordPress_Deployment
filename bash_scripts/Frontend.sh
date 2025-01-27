@@ -28,7 +28,7 @@ check_exit_status "git clone"
 
 # Change permissions of the cloned repository
 echo "Changing permissions of the cloned repository..." | tee -a $LOG_FILE
-sudo chmod -R 755 /root/WordPress_Deployment
+sudo chmod -R 755 /root/WordPress_Deployment/bash_scripts
 check_exit_status "chmod"
 
 # Run the setup script
