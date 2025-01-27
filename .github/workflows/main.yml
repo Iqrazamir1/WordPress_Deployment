@@ -25,7 +25,6 @@ jobs:
         sed -i 's/REPLACE_FRONTEND_IP/${{ secrets.FRONTEND_IP }}/g' ./bash_scripts/frontend.sh
         sed -i 's/REPLACE_CF_API/${{ secrets.CF_API }}/g' ./bash_scripts/frontend.sh
         sed -i 's/EMAIL/${{ secrets.EMAIL }}/g' ./bash_scripts/frontend.sh
-        sed -i 's/DOMAIN/${{ secrets.DOMAIN }}/g' ./configs/nginx.conf
         
     - name: Copy files to VM
       run: |
