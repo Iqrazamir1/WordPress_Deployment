@@ -45,7 +45,7 @@ sudo php -v >> /root/testing.txt
 sudo mv /root/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Update nginx configuration file
-sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
+#sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
 nginx -t && systemctl reload nginx 
 
 # Update package list and install Certbot and Certbot Nginx plugin
