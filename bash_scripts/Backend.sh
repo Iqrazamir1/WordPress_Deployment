@@ -11,11 +11,11 @@ sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d
 
 mysqladmin ping && systemctl restart mariadb
 
-password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
 username=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 25)
+password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
 
-echo $password > creds.txt
 echo $username >> creds.txt
+echo $password > creds.txt
 
 # Connect to S3 Bucket
 aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
