@@ -9,7 +9,7 @@ apt -y install mariadb-server mariadb-client
 
 sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 
-systemctl restart mariadb
+mysqladmin ping && systemctl restart mariadb
 
 password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
 username=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 25)
