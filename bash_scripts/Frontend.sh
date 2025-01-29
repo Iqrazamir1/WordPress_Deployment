@@ -26,28 +26,28 @@ snap install aws-cli --classic
 
 # Clone the GitHub repository
 # echo "Cloning GitHub repository..." | tee -a $LOG_FILE
-# sudo git clone https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
+# sudo git clone https://github.com/Iqrazamir1/WordPress_Deployment.git /home/ubuntu/WordPress_Deployment
 # check_exit_status "git clone"
 
 # Change permissions of the cloned repository
 # echo "Changing permissions of the cloned repository..." | tee -a $LOG_FILE
-# sudo chmod -R 755 /root/WordPress_Deployment/bash_scripts
+# sudo chmod -R 755 /home/ubuntu/WordPress_Deployment/bash_scripts
 # check_exit_status "chmod"
 
 # Run the setup script
 log "Running lemp-setup.sh script..."
 
 sudo apt -y update && sudo apt -y upgrade
-sudo touch /root/testing.txt
+sudo touch /home/ubuntu/testing.txt
 sudo apt -y install nginx
 sudo systemctl start nginx && sudo systemctl enable nginx 
-sudo systemctl status nginx > /root/testing.txt
+sudo systemctl status nginx > /home/ubuntu/testing.txt
 sudo apt -y install php-fpm php php-cli php-common php-imap php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
-sudo php -v >> /root/testing.txt
+sudo php -v >> /home/ubuntu/testing.txt
 
-cat /root/WordPress_Deployment/configs/nginx.conf >> testing.txt
+cat /home/ubuntu/WordPress_Deployment/configs/nginx.conf >> testing.txt
 
-sudo mv /root/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/epa-domain.conf
+sudo mv /home/ubuntu/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/epa-domain.conf
 
 # Update nginx configuration file
 #sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
