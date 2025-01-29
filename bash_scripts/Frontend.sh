@@ -76,10 +76,12 @@ sudo unzip /var/www/latest.zip -d /var/www/
 sudo rm /var/www/latest.zip 
 mv /var/www/wordpress /var/www/html
 
-sudo mv /var/www/html/wp-config-sample.php /var/www/wp-config.php
-sudo chmod 640 /var/www/wp-config.php 
+sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+sudo chmod 640 /var/www/html/wp-config.php 
 sudo chown -R www-data:www-data /var/www/html/
+sudo find /var/www/html/ -type d -exec chmod 0755 {} \;
+sudo find /var/www/html/ -type f -exec chmod 0644 {} \;
 
 SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 STRING='put your unique phrase here'
-printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/wp-config.php
+printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/html/wp-config.php
