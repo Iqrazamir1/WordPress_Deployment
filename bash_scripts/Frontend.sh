@@ -42,6 +42,8 @@ sudo systemctl status nginx > /root/testing.txt
 sudo apt -y install php-fpm php php-cli php-common php-imap php-snmp php-xml php-zip php-mbstring php-curl php-mysqli php-gd php-intl
 sudo php -v >> /root/testing.txt
 
+cat /root/WordPress_Deployment/configs/nginx.conf >> testing.txt
+
 sudo mv /root/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/nginx.conf
 
 # Update nginx configuration file
