@@ -23,7 +23,7 @@ check_exit_status "apt update and upgrade"
 
 # Clone the GitHub repository
 echo "Cloning GitHub repository..." | tee -a $LOG_FILE
-sudo git clone -b develop https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
+sudo git clone https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
 check_exit_status "git clone"
 
 # Change permissions of the cloned repository
