@@ -44,7 +44,7 @@ sudo php -v >> /root/testing.txt
 
 cat /root/WordPress_Deployment/configs/nginx.conf >> testing.txt
 
-sudo mv /root/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/nginx.conf
+sudo mv /root/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/epa-domain.conf
 
 # Update nginx configuration file
 #sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
