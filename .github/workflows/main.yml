@@ -3,7 +3,7 @@ name: Test and Deploy Bash Script
 on:
   push:
     branches:
-      - develop
+      - main
 
 jobs:
   deploy:
@@ -22,10 +22,10 @@ jobs:
     - name: Edit Script Variables
       run: |
         sed -i 's/DOMAIN/${{ secrets.DOMAIN }}/g' ./configs/nginx.conf
-        sed -i 's/REPLACE_FRONTEND_IP/${{ secrets.FRONTEND_IP }}/g' ./bash_scripts/frontend.sh
-        sed -i 's/REPLACE_CF_API/${{ secrets.CF_API }}/g' ./bash_scripts/frontend.sh
-        sed -i 's/CERTBOT_MAIL/${{ secrets.EMAIL }}/g' ./bash_scripts/frontend.sh
-        sed -i 's/CERTBOT_URL/${{ secrets.DOMAIN }}/g' ./bash_scripts/frontend.sh
+        sed -i 's/REPLACE_FRONTEND_IP/${{ secrets.FRONTEND_IP }}/g' ./bash_scripts/Frontend.sh
+        sed -i 's/REPLACE_CF_API/${{ secrets.CF_API }}/g' ./bash_scripts/Frontend.sh
+        sed -i 's/CERTBOT_MAIL/${{ secrets.EMAIL }}/g' ./bash_scripts/Frontend.sh
+        sed -i 's/CERTBOT_URL/${{ secrets.DOMAIN }}/g' ./bash_scripts/Frontend.sh
         
     - name: Copy files to VM
       run: |
@@ -47,4 +47,4 @@ jobs:
 
     - name: Run BE setup script
       run: |
-        ssh -i private_key -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.BACKEND_IP }} 'sudo sh /home/ubuntu/WordPress_Deployment/bash_scripts/backend.sh'
+        ssh -i private_key -o StrictHostKeyChecking=no -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_USER }}@${{ secrets.BACKEND_IP }} 'sudo sh /home/ubuntu/WordPress_Deployment/bash_scripts/Backend.sh'
