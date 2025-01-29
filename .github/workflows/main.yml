@@ -22,10 +22,10 @@ jobs:
     - name: Edit Script Variables
       run: |
         sed -i 's/DOMAIN/${{ secrets.DOMAIN }}/g' ./configs/nginx.conf
+        sed -i 's/REPLACE_DOMAIN/${{ secrets.DOMAIN }}/g' ./bash_scripts/Frontend.sh
+        sed -i 's/REPLACE_EMAIL/${{ secrets.EMAIL }}/g' ./bash_scripts/Frontend.sh
         sed -i 's/REPLACE_FRONTEND_IP/${{ secrets.FRONTEND_IP }}/g' ./bash_scripts/Frontend.sh
         sed -i 's/REPLACE_CF_API/${{ secrets.CF_API }}/g' ./bash_scripts/Frontend.sh
-        sed -i 's/CERTBOT_MAIL/${{ secrets.EMAIL }}/g' ./bash_scripts/Frontend.sh
-        sed -i 's/CERTBOT_URL/${{ secrets.DOMAIN }}/g' ./bash_scripts/Frontend.sh
         
     - name: Copy files to VM
       run: |
