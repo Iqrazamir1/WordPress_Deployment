@@ -21,6 +21,9 @@ echo "Running apt update..." | tee -a $LOG_FILE
 sudo apt -y update && sudo apt -y upgrade
 check_exit_status "apt update and upgrade"
 
+# Install the AWS CLI tool using Snap for managing AWS resources
+snap install aws-cli --classic
+
 # Clone the GitHub repository
 echo "Cloning GitHub repository..." | tee -a $LOG_FILE
 sudo git clone https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
@@ -82,3 +85,6 @@ sudo find /var/www/html/ -type f -exec chmod 0644 {} \;
 SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 STRING='put your unique phrase here'
 printf '%s\n' "g/$STRING/d" a "$SALT" . w | ed -s /var/www/html/wp-config.php
+
+# This securely stores the wp-config.php credentials file in AWS S3 for later use or backup
+aws s3 cp /var/www/html/wp-config.php s3://mariadbdatabase
