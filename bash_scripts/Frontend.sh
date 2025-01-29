@@ -86,6 +86,7 @@ sudo find /var/www/html/ -type f -exec chmod 0644 {} \;
 sed -i "s/username_here/DB_USERNAME/g" /var/www/html/wp-config.php
 sed -i "s/password_here/DB_PASSWORD/g" /var/www/html/wp-config.php
 sed -i "s/database_name_here/DB_USERNAME/g" /var/www/html/wp-config.php
+sed -i "s/localhost/BACKEND_IP/g" /var/www/html/wp-config.php
 
 SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
 STRING='put your unique phrase here'
