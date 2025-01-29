@@ -11,14 +11,7 @@ sed -i 's/^bind-address\s*=.*/bind-address = 0.0.0.0/' /etc/mysql/mariadb.conf.d
 
 mysqladmin ping && systemctl restart mariadb
 
-# aws s3 cp s3://mariadbdatabase/wp-config.php /var/www/html/wp-config.php
-
-# to create random usernames and passwords for my DB
-# password=$(tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 25)
-# username=$(tr -dc 'A-Za-z' < /dev/urandom | head -c 25)
-
-#DB username and password variables
-
+# Database username and password variables
 username=DB_USERNAME
 password=DB_PASSWORD
 
@@ -35,7 +28,5 @@ sudo mysql -e "FLUSH PRIVILEGES"
 sudo mysql $username < /tmp/wordpress_dump.sql
 sudo rm /tmp/wordpress_dump.sql
 
-# aws s3 cp /var/www/html/wp-config.php s3://mariadbdatabase
-
 # This securely stores the credentials file in AWS S3 for later use or backup
-# aws s3 cp creds.txt s3://mariadbdatabase
+aws s3 cp creds.txt s3://mariadbdatabase
