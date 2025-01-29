@@ -24,19 +24,6 @@ check_exit_status "apt update and upgrade"
 # Install the AWS CLI tool using Snap for managing AWS resources
 snap install aws-cli --classic
 
-# Clone the GitHub repository
-# echo "Cloning GitHub repository..." | tee -a $LOG_FILE
-# sudo git clone https://github.com/Iqrazamir1/WordPress_Deployment.git /home/ubuntu/WordPress_Deployment
-# check_exit_status "git clone"
-
-# Change permissions of the cloned repository
-# echo "Changing permissions of the cloned repository..." | tee -a $LOG_FILE
-# sudo chmod -R 755 /home/ubuntu/WordPress_Deployment/bash_scripts
-# check_exit_status "chmod"
-
-# Run the setup script
-log "Running lemp-setup.sh script..."
-
 sudo apt -y update && sudo apt -y upgrade
 sudo touch /home/ubuntu/testing.txt
 sudo apt -y install nginx
@@ -50,7 +37,6 @@ cat /home/ubuntu/WordPress_Deployment/configs/nginx.conf >> testing.txt
 sudo mv /home/ubuntu/WordPress_Deployment/configs/nginx.conf /etc/nginx/conf.d/epa-domain.conf
 
 # Update nginx configuration file
-#sed -i "s/SERVERNAME/$dns_record/g" /etc/nginx/conf.d/nginx.conf
 nginx -t && systemctl reload nginx 
 
 # Update package list and install Certbot and Certbot Nginx plugin
@@ -58,7 +44,7 @@ sudo apt -y update && sudo apt -y upgrade
 sudo apt -y install certbot
 sudo apt -y install python3-certbot-nginx
 
-# Define your email
+# Define your email and domain
 EMAIL="REPLACE_EMAIL"
 DOMAIN="REPLACE_DOMAIN"
 
