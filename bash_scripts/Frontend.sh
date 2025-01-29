@@ -25,14 +25,14 @@ check_exit_status "apt update and upgrade"
 snap install aws-cli --classic
 
 # Clone the GitHub repository
-echo "Cloning GitHub repository..." | tee -a $LOG_FILE
-sudo git clone https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
-check_exit_status "git clone"
+# echo "Cloning GitHub repository..." | tee -a $LOG_FILE
+# sudo git clone https://github.com/Iqrazamir1/WordPress_Deployment.git /root/WordPress_Deployment
+# check_exit_status "git clone"
 
 # Change permissions of the cloned repository
-echo "Changing permissions of the cloned repository..." | tee -a $LOG_FILE
-sudo chmod -R 755 /root/WordPress_Deployment/bash_scripts
-check_exit_status "chmod"
+# echo "Changing permissions of the cloned repository..." | tee -a $LOG_FILE
+# sudo chmod -R 755 /root/WordPress_Deployment/bash_scripts
+# check_exit_status "chmod"
 
 # Run the setup script
 log "Running lemp-setup.sh script..."
