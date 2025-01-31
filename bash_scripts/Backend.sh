@@ -24,9 +24,6 @@ echo $username > creds.txt
 echo $password >> creds.txt
 
 # Download and restore the WordPress database backup from S3
-############# aws s3 cp s3://mariadbdatabase/wordpress_dump.sql.gz /tmp/wordpress_dump.sql.gz
-############# sudo gunzip /tmp/wordpress_dump.sql.gz
-
 aws s3 cp s3://mariadbdatabase/backup.sql.gz /tmp/backup.sql.gz
 sudo gunzip /tmp/backup.sql.gz
 
@@ -37,9 +34,6 @@ sudo mysql -e "GRANT ALL PRIVILEGES ON $username.* TO '$username'@'FRONTEND_IP'"
 sudo mysql -e "FLUSH PRIVILEGES"
 
 # Restore the database backup
-############# sudo mysql $username < /tmp/wordpress_dump.sql
-############# sudo rm /tmp/wordpress_dump.sql
-
 sudo mysql $username < /tmp/backup.sql.gz
 sudo rm /tmp/backup.sql.gz
 
