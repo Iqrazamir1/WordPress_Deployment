@@ -73,9 +73,10 @@ sudo apt -y install unzip
 sudo wget -O /var/www/latest.zip https://wordpress.org/latest.zip 
 sudo unzip /var/www/latest.zip -d /var/www/
 sudo rm /var/www/latest.zip 
-
-# Rename extracted WordPress folder to match web root
 mv /var/www/wordpress /var/www/html
+
+#Installing ua92-chatbot plugin
+aws s3 cp s3://WordPress_Deployment/UA92ChatBot /var/www/html/wp-content/plugins/UA92ChatBot --recursive
 
 # Set up WordPress configuration file with appropriate permissions
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
