@@ -76,7 +76,7 @@ sudo rm /var/www/latest.zip
 mv /var/www/wordpress /var/www/html
 
 #Installing ua92-chatbot plugin
-aws s3 cp s3://mariadbdatabase/UA92ChatBot /var/www/html/wp-content/plugins/UA92ChatBot --recursive
+aws s3 cp s3://mariadbdatabase/UA92ChatBot/ /var/www/html/wp-content/plugins/UA92ChatBot --recursive
 
 # Set up WordPress configuration file with appropriate permissions
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
