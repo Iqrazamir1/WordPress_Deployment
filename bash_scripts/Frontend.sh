@@ -78,6 +78,12 @@ mv /var/www/wordpress /var/www/html
 #Installing ua92-chatbot plugin
 aws s3 cp s3://mariadbdatabase/UA92ChatBot /var/www/html/wp-content/plugins/UA92ChatBot --recursive
 
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+sudo chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
+
+sudo -u www-data wp plugin activate UA92ChatBot --path=/var/www/html
+
 # Set up WordPress configuration file with appropriate permissions
 sudo mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
 sudo chmod 640 /var/www/html/wp-config.php 
@@ -90,8 +96,6 @@ sed -i "s/username_here/DB_USERNAME/g" /var/www/html/wp-config.php
 sed -i "s/password_here/DB_PASSWORD/g" /var/www/html/wp-config.php
 sed -i "s/database_name_here/DB_USERNAME/g" /var/www/html/wp-config.php
 sed -i "s/localhost/BACKEND_IP/g" /var/www/html/wp-config.php
-
-#wp plugin activate --allow-root UA92ChatBot --path=/var/www/html/
 
 # Fetch WordPress security salts and insert them into wp-config.php
 SALT=$(curl -L https://api.wordpress.org/secret-key/1.1/salt/)
